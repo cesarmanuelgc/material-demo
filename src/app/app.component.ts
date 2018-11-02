@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { EditCourseComponent } from './edit-course/edit-course.component';
 //import 'rxjs/add/observable/timer';
 
 @Component({
@@ -35,7 +37,7 @@ export class AppComponent {
   /**
    *
    */
-  constructor() {
+  constructor(private dialog: MatDialog) {
     // this.isLoading = true;
     // this.getCourses()
     //   .subscribe(x => this.isLoading = false);
@@ -63,5 +65,14 @@ export class AppComponent {
         category.selected = !category.selected;
   }
 
+  openDialog() {
+    this.dialog.open(EditCourseComponent, {
+      data: {
+        courseId: 1
+      }
+    })
+      .afterClosed()
+      .subscribe(result => console.log(result));
+  }
 
 }
